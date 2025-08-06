@@ -1,0 +1,184 @@
+/* =================================
+   GLOBAL STYLES & THEME
+   ================================= */
+:root {
+    --primary-accent: #8a2be2; /* BlueViolet */
+    --text-light: #f0f2f5;
+    --text-dark: #212529;
+    
+    --choice-red: #e74c3c;
+    --choice-blue: #3498db;
+    --choice-yellow: #f1c40f;
+    --choice-green: #2ecc71;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-light);
+}
+
+#app {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.bg-dark-theme {
+    /* İstenen hareketli, renkli arkaplan */
+    background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =================================
+   HOME, LOBBY, LOGIN, HOST STYLES
+   ================================= */
+.join-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 90%;
+    max-width: 900px;
+    color: var(--text-dark);
+}
+.join-card a { color: var(--primary-accent); font-weight: bold; }
+.join-card small { color: #6c757d; }
+.join-card hr { border-top: 1px solid rgba(0, 0, 0, 0.2); }
+
+.form-control-lg, .form-control {
+    background-color: #f0f2f5;
+    border: 2px solid #ced4da;
+    color: var(--text-dark);
+}
+.form-control-lg:focus, .form-control:focus {
+    background-color: #fff;
+    color: var(--text-dark);
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 0.25rem rgba(138, 43, 226, 0.3);
+}
+
+.btn-join {
+    background-color: var(--primary-accent);
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-join:hover {
+    background-color: #6a1eae;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.btn-admin {
+    background-color: #0dcaf0; color: white; font-weight: bold;
+    border: none; transition: all 0.3s ease;
+}
+.btn-admin:hover {
+    background-color: #0aa7c4; transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.player-list-card { background-color: #f8f9fa; border: none; }
+.player-list-card .card-header { background-color: #e9ecef; font-weight: bold; }
+
+/* =================================
+   GAME SCREEN & SCOREBOARD
+   ================================= */
+#game-container, #question-screen { display: flex; flex-direction: column; height: 100vh; width:100%;}
+.game-header { flex-shrink: 0; padding: 1rem; background-color: rgba(0,0,0,0.2); position: relative; z-index: 10; }
+.timer-container { height: 8px; background-color: rgba(0,0,0,0.3); border-radius: 4px; overflow: hidden; margin-bottom: 1rem; }
+.timer-bar { height: 100%; background-color: var(--text-light); }
+.question-counter { font-size: 1.2rem; text-align: center; font-weight: 600; }
+.game-body { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 1rem; margin-top: -80px; }
+.question-card { background: #16213E; border-radius: 1rem; width: 95%; max-width: 900px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 2rem 1.5rem; color: var(--text-light);}
+.question-card h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; }
+.game-footer { flex-shrink: 0; padding: 0.5rem 1rem 1rem 1rem; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; height: 100%; }
+.choice-btn { display: flex; align-items: center; font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 600; padding: 1rem; border: 3px solid transparent; border-radius: 0.5rem; color: white; transition: all 0.2s ease; min-height: 80px; }
+.choice-btn:hover:not(:disabled) { transform: scale(1.02); border-color: var(--text-light); }
+.choice-btn .shape { font-size: 1.8rem; margin-right: 1.2rem; width: 40px; }
+.choice-btn .text { text-align: left; flex-grow: 1; }
+.choice-red { background-color: var(--choice-red); }
+.choice-blue { background-color: var(--choice-blue); }
+.choice-yellow { background-color: var(--choice-yellow); }
+.choice-green { background-color: var(--choice-green); }
+.choice-disabled { filter: brightness(0.6); cursor: not-allowed; }
+.choice-selected { transform: scale(1.05); border-color: white; box-shadow: 0 0 25px white; }
+.table-dark-transparent { --bs-table-bg: rgba(22, 33, 62, 0.8); --bs-table-striped-bg: rgba(15, 52, 96, 0.8); font-size: 1.2rem; border-radius: 10px; overflow: hidden; color: var(--text-light); }
+.table-dark-transparent thead { color: var(--text-light); font-weight: bold; }
+#scoreboard-body tr:first-child { font-size: 1.8rem; font-weight: bold; color: #FFD700; }
+#scoreboard-body tr:nth-child(2) { font-size: 1.5rem; font-weight: bold; color: #C0C0C0; }
+#scoreboard-body tr:nth-child(3) { font-size: 1.3rem; font-weight: bold; color: #CD7F32; }
+
+#countdown-screen, #scoreboard-container {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-footer {
+  color: rgba(6, 6, 6, 0.85); /* Hafif saydam beyaz */
+  font-weight: 600;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* Yazıya derinlik katan gölge */
+  padding: 1rem;
+  letter-spacing: 0.05em; /* Harf aralığını hafifçe açar */
+}
+
+.brand-logo {
+    font-weight: 700;
+    font-size: clamp(2.5rem, 8vw, 4rem); /* Ekrana göre ayarlı büyük font */
+    color: var(--primary-accent);
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.brand-slogan {
+    font-size: 1.1rem;
+    color: #495057; /* Biraz daha koyu bir metin rengi */
+}
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.dialog-box {
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  max-width: 400px;
+}
+.dialog-success {
+  background: linear-gradient(135deg, #2ecc71, #28a745);
+}
+.dialog-error {
+  background: linear-gradient(135deg, #e74c3c, #dc3545);
+}
+.dialog-message {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
